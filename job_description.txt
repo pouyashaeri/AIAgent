@@ -58,7 +58,7 @@ job details
 arrow_back
 Back to jobs search
 Jobs search results
-2,761
+2,759
   jobs matched
 Senior Software Engineer, ChromeOS, Accessibility
 New Taipei, Banqiao District, New Taipei City, Taiwan
@@ -103,9 +103,9 @@ Software Engineer III, Infrastructure, Google Cloud Business Platforms
 Cambridge, MA, USA
 Engineering Director, AI, HR Engineering
 Hyderabad, Telangana, India
-Software Engineer III, Platforms and Devices
+Software Engineer, Pixel Mobile Wireless
 New Taipei, Banqiao District, New Taipei City, Taiwan
-1‑20 of 2761
+1‑20 of 2759
 navigate_next
 Follow Life at Google on
  

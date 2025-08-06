@@ -9,6 +9,9 @@ from googleapiclient.discovery import build
 from dotenv import load_dotenv
 from google.auth.transport.requests import Request
 from PyPDF2 import PdfReader
+from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+from email import encoders
 
 from utils import generate_followup_email, log_interaction
 
@@ -51,9 +54,33 @@ def create_message(to, subject, message_text):
     return {'raw': raw_message}
 
 
+def create_message_with_attachment(to, subject, message_text, file_path):
+    message = MIMEMultipart()
+    message['to'] = to
+    message['from'] = SENDER_EMAIL
+    message['subject'] = subject
+
+    # Body
+    message.attach(MIMEText(message_text, 'plain'))
+
+    # Attachment
+    with open(file_path, 'rb') as f:
+        part = MIMEBase('application', 'pdf')
+        part.set_payload(f.read())
+        encoders.encode_base64(part)
+        part.add_header(
+            'Content-Disposition',
+            f'attachment; filename="{os.path.basename(file_path)}"',
+        )
+        message.attach(part)
+
+    raw_message = base64.urlsafe_b64encode(message.as_bytes()).decode()
+    return {'raw': raw_message}
+
+
 def send_email(to, subject, body):
     service = get_gmail_service()
-    message = create_message(to, subject, body)
+    message = create_message_with_attachment(to, subject, body, "resume/resume.pdf")
     sent = service.users().messages().send(userId="me", body=message).execute()
     print("Email sent! Message ID:", sent['id'])
 
@@ -103,6 +130,9 @@ if __name__ == "__main__":
 
     print("Generating email using GPT-4...")
     email_body = generate_followup_email(resume_text, job_description, RECIPIENT_EMAIL)
+
+    # print("Generated email body:")
+    # print(email_body)
 
     print("Sending email...")
     send_email(RECIPIENT_EMAIL, subject, email_body)
