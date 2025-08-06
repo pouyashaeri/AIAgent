@@ -1,0 +1,7 @@
+.env
+creds/token.json
+creds/credentials.json
+__pycache__/
+*.pyc
+*.log
+resume.txt
