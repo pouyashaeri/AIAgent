@@ -119,10 +119,3 @@ https://pouyashaeri.github.io
 
 This project is intended for personal and academic use only. Please respect all API terms of service (OpenAI, Google).
 
----
-
-## Author
-
-Pouya Shaeri  
-PhD Student, Arizona State University  
-[LinkedIn](https://www.linkedin.com/in/pouyashaeri/) | [GitHub](https://pouyashaeri.github.io)
